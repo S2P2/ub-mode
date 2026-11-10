@@ -1,0 +1,3 @@
+interface:
+  display_name: "UB Mode Implementation"
+  short_description: "UB engineering discipline inside a caller-owned implementation workflow"
