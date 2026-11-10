@@ -66,3 +66,11 @@ UB quality gates.
 The CRAP, Dryer, and Mutator tools are **not bundled** with this repository.
 Only report those gates as passing after actually running the relevant tools;
 record unavailable, out-of-scope, and unrun checks explicitly.
+
+## Using UB Mode with Matt Pocock's implementation workflow
+
+For tasks routed through [Matt Pocock's skills](https://github.com/mattpocock/skills),
+use the optional [`ub-mode-implementation` supporting skill](skills/ub-mode-implementation/README.md).
+It preserves UB's domain and root-cause discipline without overriding Matt's
+TDD seams, review stages, or branch and PR policy. The original standalone
+`/ub-mode` behavior is unchanged.
