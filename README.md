@@ -18,3 +18,59 @@
 ## Installation
 
 Copy `SKILL.md` into your agent's skills directory as `ub-mode/SKILL.md` (for example `~/.grok/skills/ub-mode/SKILL.md`, `~/.claude/skills/ub-mode/SKILL.md`, or `~/.cursor/skills/ub-mode/SKILL.md`), then invoke `/ub-mode`.
+
+## Using UB Mode with Matt Pocock's implementation flow
+
+The original root `SKILL.md` remains the standalone `/ub-mode` skill.
+The optional [`ub-mode-implementation`](skills/ub-mode-implementation/SKILL.md)
+is a **supporting, model-invoked** discipline for production changes inside
+another workflow, including
+[Matt Pocock's `implement`](https://github.com/mattpocock/skills/blob/main/skills/engineering/implement/SKILL.md)
+and
+[`implement-spec`](https://github.com/mattpocock/skills/blob/main/skills/engineering/implement-spec/SKILL.md).
+
+It retains UB's incremental change, architecture, root-cause, and evidence
+practices but leaves workflow ownership to Matt's skills:
+
+| Responsibility | Owner |
+| --- | --- |
+| Spec, tickets, approved testing seams, orchestration | Matt's implementation workflow |
+| Red-green tests at agreed public seams | Matt's `tdd` |
+| Domain boundaries, type-safety, idempotency, root causes, smallest change | `ub-mode-implementation` |
+| Standards/Spec review and refactoring decisions | Matt's `code-review` |
+| CRAP, duplication, mutation evidence when tools are available and in scope | UB checks surfaced to review/CI |
+| Branches, worktrees, commits, PRs, merges | Calling workflow and repository policy |
+
+### Installation
+
+Install the optional skill by copying
+`skills/ub-mode-implementation/` to your agent's skills directory as
+`ub-mode-implementation/` (preserving `SKILL.md` and `agents/openai.yaml`).
+Keep the root `ub-mode` installation separate.
+
+This repository does **not** patch Matt's skills or automatically modify their
+router. To make invocation deterministic, customize your installed copy of
+Matt's `implement` (and, for task-graph builds, its `implement-spec`
+implementer instructions) to load the supporting skill before coding:
+
+```markdown
+Call the Skill tool with "ub-mode-implementation" to apply UB's
+implementation discipline, without changing the workflow's ownership
+of TDD, review, branching, commits, or delivery.
+```
+
+Continue calling Matt's `tdd` at pre-agreed seams and `code-review`
+when implementation ends. Exclude deliberately throwaway prototypes from
+UB quality gates.
+
+The CRAP, Dryer, and Mutator tools are **not bundled** with this repository.
+Only report those gates as passing after actually running the relevant tools;
+record unavailable, out-of-scope, and unrun checks explicitly.
+
+## Using UB Mode with Matt Pocock's implementation workflow
+
+For tasks routed through [Matt Pocock's skills](https://github.com/mattpocock/skills),
+use the optional [`ub-mode-implementation` supporting skill](skills/ub-mode-implementation/README.md).
+It preserves UB's domain and root-cause discipline without overriding Matt's
+TDD seams, review stages, or branch and PR policy. The original standalone
+`/ub-mode` behavior is unchanged.
